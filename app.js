@@ -23,9 +23,9 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/matrixbot', indexRouter);
-app.use('/matrixbot/users', usersRouter);
-app.use('/matrixbot', matrixBotAccountRoute);
+app.use('/matrix', indexRouter);
+app.use('/matrix/users', usersRouter);
+app.use('/matrix', matrixBotAccountRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
