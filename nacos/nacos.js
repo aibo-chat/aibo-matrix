@@ -7,9 +7,11 @@ const USERNAME = process.env.NACOS_CONFIG_USERNAME
 const PASSWORD = process.env.NACOS_CONFIG_PASSWORD;
 const NAMESPACE = process.env.NACOS_CONFIG_NAMESPACE
 
+
 async function nacos() {
-  await register()
-  await config()
+  //由于aibo没有nacos，所以不需要注册
+  // await register()
+  // await config()
 }
 
 async function register() {
