@@ -13,13 +13,17 @@ const taskProcessor = require('./task-processor')
 global.throttles = {}
 
 async function main() {
-  if (!process.env.DEV_START_BOT && process.env.NODE_ENV == 'dev') {
+  if (process.env.NODE_ENV == 'dev' && !process.env.DEV_START_BOT) {
     console.error("!!!!!!!!!!!dev environment, without starting any bots!!!!!!!!!!!")
     return;
   }
   let bots = await matrixBotAccountMapper.list();
   for (let bot of bots) {
-    await start(bot);
+    //如果是aibodev 则必须是dev环境才启动
+    if ((bot.localpart == 'aibodev' && process.env.NODE_ENV == 'dev')
+      || (bot.localpart != 'aibodev' && process.env.NODE_ENV != 'dev')) {
+      await start(bot);
+    }
   }
   timerRefresh();
 }
