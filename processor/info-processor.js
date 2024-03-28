@@ -18,7 +18,7 @@ async function infoBot(bot, room_id, sender, ques) {
       console.log(res);
       let {action, network, token, amount, target} = res?.data.answer;
       let {network: n, symbol: s, amount: a} = transferReceiver(network, token, amount, msg);
-      let head_title = "I think you can use the DEFED transfer function to help you. You can switch between different networks to transfer assets, and your DEFED account balance can also be viewed in real-time.";
+      let head_title = "Hey buddy, let me show you a trick: use the transfer function!\nIt's as easy as pie! You can also check your account balance in real time!";
       let body = {head_title, amount: a, target, network: n, symbol: s}
       return {body, msgtype: "d.common_transfer"}
     } else if (res?.data?.action == 'convert') {
@@ -29,6 +29,7 @@ async function infoBot(bot, room_id, sender, ques) {
       } = res?.data.answer;
       let a = {order_type, from_network, from_symbol, from_amount, to_network, to_symbol, to_amount, price};
       let body = convertResolver(a, msg);
+      body.head_title="Hey there, allow me to introduce you to the Convert function, your one-stop shop for all things DEX aggregation!";
       body.original_answer = res?.data.answer
       return {body, msgtype: "d.convert"}
     }
