@@ -1,7 +1,7 @@
 const axios = require('axios');
-
-let ignores = process.env.AUTH_IGNORES;
-let host = process.env.MATRIX_HOME_SERVER_URL;
+let AUTH_IGNORES = "/matrix/bot/list,";
+let ignores = process.env.AUTH_IGNORES || AUTH_IGNORES;
+let host = process.env.MATRIX_HOME_SERVER_URL || ignores;
 ignores = ignores ? ignores.split(/\W*,\W*/) : []
 
 module.exports = {
