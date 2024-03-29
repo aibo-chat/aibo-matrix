@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/matrix', indexRouter);
 app.use('/matrix/users', usersRouter);
 app.use('/matrix', matrixBotAccountRoute);
-app.use('/matrix/key', matrixKeyRoute);
+app.use('/matrix', matrixKeyRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

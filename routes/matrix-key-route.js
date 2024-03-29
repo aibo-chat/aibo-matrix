@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var matrixKeyService = require("../service/matrix-key-service");
 /* GET users listing. */
-router.post('/saveSecurityKey', async function (req, res, next) {
+router.post('/key/saveSecurityKey', async function (req, res, next) {
   matrixKeyService.saveSecurityKey(req)
     .then(body => {
       res.json(body);
@@ -11,7 +11,7 @@ router.post('/saveSecurityKey', async function (req, res, next) {
   })
 });
 
-router.post('/getSecurityKey', async function (req, res, next) {
+router.post('/key/getSecurityKey', async function (req, res, next) {
   matrixKeyService.getSecurityKey(req)
     .then(body => {
       res.json(body);
@@ -20,7 +20,7 @@ router.post('/getSecurityKey', async function (req, res, next) {
   })
 });
 
-router.post('/saveSessionKey', async function (req, res, next) {
+router.post('/key/saveSessionKey', async function (req, res, next) {
   matrixKeyService.saveSessionKey(req)
     .then(body => {
       res.json(body);
@@ -29,7 +29,7 @@ router.post('/saveSessionKey', async function (req, res, next) {
   })
 });
 
-router.post('/listSessionKey', async function (req, res, next) {
+router.post('/key/listSessionKey', async function (req, res, next) {
   matrixKeyService.listSessionKey(req)
     .then(body => {
       res.json(body);
