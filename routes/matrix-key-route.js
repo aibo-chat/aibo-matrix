@@ -3,39 +3,23 @@ var router = express.Router();
 var matrixKeyService = require("../service/matrix-key-service");
 /* GET users listing. */
 router.post('/key/saveSecurityKey', async function (req, res, next) {
-  matrixKeyService.saveSecurityKey(req)
-    .then(body => {
-      res.json(body);
-    }).catch(err => {
-    next(err);
-  })
+  let body = await matrixKeyService.saveSecurityKey(req);
+  res.json(body)
 });
 
 router.get('/key/getSecurityKey', async function (req, res, next) {
-  matrixKeyService.getSecurityKey(req)
-    .then(body => {
-      res.json(body);
-    }).catch(err => {
-    next(err);
-  })
+  let body = await matrixKeyService.getSecurityKey(req);
+  res.json(body);
 });
 
 router.post('/key/saveSessionKey', async function (req, res, next) {
-  matrixKeyService.saveSessionKey(req)
-    .then(body => {
-      res.json(body);
-    }).catch(err => {
-    next(err);
-  })
+  let body = await matrixKeyService.saveSessionKey(req);
+  res.json(body);
 });
 
 router.get('/key/listSessionKey', async function (req, res, next) {
-  matrixKeyService.listSessionKey(req)
-    .then(body => {
-      res.json(body);
-    }).catch(err => {
-    next(err);
-  })
+  let body = await matrixKeyService.listSessionKey(req)
+  res.json(body);
 });
 
 module.exports = router;
