@@ -20,6 +20,13 @@ require('./task/task').main().then();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(cors({
+  origin: '*',
+  methods: ["PUT", "POST", "GET", "DELETE", "OPTIONS"],
+  allowedHeaders: '*',
+  credentials: true
+}));
+
 app.use(logger('dev'));
 app.use(authInfo);
 app.use(express.json());
@@ -27,12 +34,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors({
-  origin: '*',
-  methods: ["PUT", "POST", "GET", "DELETE", "OPTIONS"],
-  allowedHeaders: '*',
-  credentials: true
-}));
 
 app.use('/matrix', indexRouter);
 app.use('/matrix/users', usersRouter);
