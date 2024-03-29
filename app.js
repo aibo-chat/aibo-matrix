@@ -27,7 +27,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors({origin: '*', methods: ['GET', 'POST'], allowedHeaders: '*', credentials: true,}));
+app.use(cors({origin: '*', methods: '*', allowedHeaders: '*', credentials: true}));
 app.use('/matrix', indexRouter);
 app.use('/matrix/users', usersRouter);
 app.use('/matrix', matrixBotAccountRoute);
