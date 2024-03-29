@@ -11,7 +11,7 @@ router.post('/key/saveSecurityKey', async function (req, res, next) {
   })
 });
 
-router.post('/key/getSecurityKey', async function (req, res, next) {
+router.get('/key/getSecurityKey', async function (req, res, next) {
   matrixKeyService.getSecurityKey(req)
     .then(body => {
       res.json(body);
@@ -29,7 +29,7 @@ router.post('/key/saveSessionKey', async function (req, res, next) {
   })
 });
 
-router.post('/key/listSessionKey', async function (req, res, next) {
+router.get('/key/listSessionKey', async function (req, res, next) {
   matrixKeyService.listSessionKey(req)
     .then(body => {
       res.json(body);
