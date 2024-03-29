@@ -25,16 +25,18 @@ module.exports = {
           'authorization': `Bearer ${token}`
         }
       });
+      console.log(response);
       const res = response.data;
       const user_id = res.user_id;
       if (!user_id) {
-        res.status(401).json({error: 'Unauthorized'});
+        res.status(401).json({error: 'Unauthorized aibo'});
         return;
       }
       req.user = {user_id}
       next();
     } catch (e) {
-      res.status(401).json({error: 'Unauthorized'});
+      console.log(e);
+      res.status(401).json({error: 'Unauthorized aibo'});
       return;
     }
   }

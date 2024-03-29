@@ -17,9 +17,10 @@ async function infoBot(bot, room_id, sender, ques) {
     } else if (res?.data?.action == 'transfer') {
       console.log(res);
       let {action, network, token, amount, target} = res?.data.answer;
-      let {network: n, symbol: s, amount: a} = transferReceiver(network, token, amount, msg);
+      let {network: n, symbol: s, amount: a, target: t} = transferReceiver(network, token, amount, msg, target);
       let head_title = "Hey buddy, let me show you a trick: use the transfer function!\nIt's as easy as pie! You can also check your account balance in real time!";
-      let body = {head_title, amount: a, target, network: n, symbol: s}
+      let body = {head_title, amount: a, target, network: n, symbol: s, address: t}
+      console.log(body)
       return {body, msgtype: "d.common_transfer"}
     } else if (res?.data?.action == 'convert') {
       console.log(res);
@@ -29,7 +30,7 @@ async function infoBot(bot, room_id, sender, ques) {
       } = res?.data.answer;
       let a = {order_type, from_network, from_symbol, from_amount, to_network, to_symbol, to_amount, price};
       let body = convertResolver(a, msg);
-      body.head_title="Hey there, allow me to introduce you to the Convert function, your one-stop shop for all things DEX aggregation!";
+      body.head_title = "Hey there, allow me to introduce you to the Convert function, your one-stop shop for all things DEX aggregation!";
       body.original_answer = res?.data.answer
       return {body, msgtype: "d.convert"}
     }
@@ -253,7 +254,7 @@ const TRANSFER_TOKEN_MAP = {
 }
 
 
-function transferReceiver(network, symbol, amount, msg) {
+function transferReceiver(network, symbol, amount, msg, target) {
   if (!network) network = '';
   network = network.toLowerCase();
   if (!symbol) symbol = '';
@@ -287,15 +288,15 @@ function transferReceiver(network, symbol, amount, msg) {
   }
 
   let token = match(network, symbol);
-  if (token) return {amount, ...token};
+  if (token) return {amount, ...token, target};
   if (symbol) {
     token = match('polygon', symbol);
-    if (token) return {amount, ...token};
-    token = match('ethereum', symbol);
+    if (token) return {amount, ...token, target};
+    token = match('ethereum', symbol, target);
     if (token) return {amount, ...token};
   }
 
-  return {network: network, symbol: "", amount}
+  return {network: network, symbol: "", amount, target}
 }
 
 function match(network, symbol) {
