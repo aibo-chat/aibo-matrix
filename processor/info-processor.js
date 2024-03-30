@@ -104,51 +104,51 @@ function convertResolver(body, msg) {
   if (!to_amount) to_amount = '';
   if (!price) price = '';
 
-  if (order_type != "market" && order_type != "limit") order_type = '';
+  // if (order_type != "market" && order_type != "limit") order_type = '';
 
   //识别出来数字
   let m = from_amount.match(/(?!0(\.0+)?$)\d+(\.\d+)?/);
   from_amount = m ? m[0] : ''
-  m = to_amount.match(/(?!0(\.0+)?$)\d+(\.\d+)?/);
-  to_amount = m ? m[0] : ''
-  m = price.match(/(?!0(\.0+)?$)\d+(\.\d+)?/);
-  price = m ? m[0] : ''
+  // m = to_amount.match(/(?!0(\.0+)?$)\d+(\.\d+)?/);
+  // to_amount = m ? m[0] : ''
+  // m = price.match(/(?!0(\.0+)?$)\d+(\.\d+)?/);
+  // price = m ? m[0] : ''
 
   //规范化network
-  if (!from_network) from_network = '';
-  if (!to_network) to_network = '';
-  if (from_network) from_network = (from_network.match(/polgyon/)) ? "polygon" : "ethereum";
-  if (to_network) to_network = (to_network.match(/polygon/)) ? "polygon" : "ethereum";
+  // if (!from_network) from_network = '';
+  // if (!to_network) to_network = '';
+  // if (from_network) from_network = (from_network.match(/polgyon/)) ? "polygon" : "ethereum";
+  // if (to_network) to_network = (to_network.match(/polygon/)) ? "polygon" : "ethereum";
 
-  let isMatch = false;
-  if (from_symbol) {
-    for (let p in CONVERT_SYMBOL_MAP) {
-      if (m = from_symbol.match(new RegExp(p))) {
-        let v = CONVERT_SYMBOL_MAP[p];
-        from_symbol = v.symbol;
-        if (v.network) from_network = v.network;
-        if (!v.network && !from_network) from_network = 'ethereum';
-        isMatch = true;
-        break;
-      }
-    }
-  }
-  if (!isMatch) from_symbol = '';
-
-  isMatch = false;
-  if (to_symbol) {
-    for (let p in CONVERT_SYMBOL_MAP) {
-      if (m = to_symbol.match(new RegExp(p))) {
-        let v = CONVERT_SYMBOL_MAP[p];
-        to_symbol = v.symbol;
-        if (v.network) to_network = v.network;
-        if (!v.network && !to_network) to_network = 'ethereum';
-        isMatch = true;
-        break;
-      }
-    }
-  }
-  if (!isMatch) to_symbol = '';
+  // let isMatch = false;
+  // if (from_symbol) {
+  //   for (let p in CONVERT_SYMBOL_MAP) {
+  //     if (m = from_symbol.match(new RegExp(p))) {
+  //       let v = CONVERT_SYMBOL_MAP[p];
+  //       from_symbol = v.symbol;
+  //       if (v.network) from_network = v.network;
+  //       if (!v.network && !from_network) from_network = 'ethereum';
+  //       isMatch = true;
+  //       break;
+  //     }
+  //   }
+  // }
+  // if (!isMatch) from_symbol = '';
+  //
+  // isMatch = false;
+  // if (to_symbol) {
+  //   for (let p in CONVERT_SYMBOL_MAP) {
+  //     if (m = to_symbol.match(new RegExp(p))) {
+  //       let v = CONVERT_SYMBOL_MAP[p];
+  //       to_symbol = v.symbol;
+  //       if (v.network) to_network = v.network;
+  //       if (!v.network && !to_network) to_network = 'ethereum';
+  //       isMatch = true;
+  //       break;
+  //     }
+  //   }
+  // }
+  // if (!isMatch) to_symbol = '';
 
   return {order_type, from_network, from_symbol, from_amount, to_network, to_symbol, to_amount, price}
 }
